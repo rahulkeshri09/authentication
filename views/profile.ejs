@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>profile</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    </head>
+    <body>
+        <% if(locals.user){ %>
+            <h3><%= user.name %></h3>
+            <a href="/user/destroy-session">Sign out</a>
+            <div><h2>Change password</h2></div>
+            <form action="/user/reset-pwd" method="POST">
+                <input type="password" name="old" placeholder="Enter old password">
+                <input type="password" name="new" placeholder="emter new password">
+                <input type="submit" placeholder="Reset password">
+            </form>
+        <% } %>
+        <script>
+        <% if(flash.success && flash.success.length>0){ %>
+            new Noty({
+                theme:'relax',
+                text:"<%= flash.success %>",
+                type:'success',
+                layout:'topRight',
+                timeout:1500
+            }).show();
+        <% } %>
+        </script>
+    </body>
+</html>
